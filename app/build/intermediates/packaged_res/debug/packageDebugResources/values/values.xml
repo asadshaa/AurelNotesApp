@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="background_dark">#141318</color>
+    <color name="background_light">#F8F6F1</color>
+    <color name="ink_primary_dark">#EDE9F5</color>
+    <color name="ink_primary_light">#25232B</color>
+    <color name="primary_dark">#9C8DF6</color>
+    <color name="primary_light">#7564D8</color>
+    <color name="surface_dark">#1E1C24</color>
+    <color name="surface_light">#FFFFFF</color>
+    <string name="action_archive">Archive</string>
+    <string name="action_delete">Delete</string>
+    <string name="action_export">Export</string>
+    <string name="action_lock_vault">Move to Vault</string>
+    <string name="action_pin">Pin</string>
+    <string name="action_restore">Restore</string>
+    <string name="action_save">Save</string>
+    <string name="action_saved">Saved</string>
+    <string name="action_saving">Saving…</string>
+    <string name="action_search">Search notes, tags, contents…</string>
+    <string name="action_share">Share</string>
+    <string name="action_unarchive">Unarchive</string>
+    <string name="action_unlock_vault">Unlock Vault</string>
+    <string name="action_unpin">Unpin</string>
+    <string name="app_name">Aurel</string>
+    <string name="empty_home_desc">Capture ideas, reflect on your day, build your knowledge web, or plan key tasks.</string>
+    <string name="empty_home_title">Begin Your Thinking Space</string>
+    <string name="empty_notes_desc">Tap the pencil below to write your first thought.</string>
+    <string name="empty_notes_title">No Notes Yet</string>
+    <string name="empty_search_desc">Try searching for other keywords or tags.</string>
+    <string name="empty_search_title">No matching notes found</string>
+    <string name="empty_tasks_desc">You have no pending tasks. Add one to stay focused.</string>
+    <string name="empty_tasks_title">Clear Horizon</string>
+    <string name="nav_calendar">Calendar</string>
+    <string name="nav_home">Home</string>
+    <string name="nav_notebooks">Notebooks</string>
+    <string name="nav_notes">Notes</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_tasks">Tasks</string>
+    <string name="tagline">Personal Notes &amp; Thinking Space</string>
+    <style name="Theme.Aurel" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

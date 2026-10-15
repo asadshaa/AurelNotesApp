@@ -1,0 +1,11 @@
+<resources>
+    <color name="primary_light">#7564D8</color>
+    <color name="background_light">#F8F6F1</color>
+    <color name="surface_light">#FFFFFF</color>
+    <color name="ink_primary_light">#25232B</color>
+
+    <color name="primary_dark">#9C8DF6</color>
+    <color name="background_dark">#141318</color>
+    <color name="surface_dark">#1E1C24</color>
+    <color name="ink_primary_dark">#EDE9F5</color>
+</resources>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.aurel.notes.SecurityAndPortabilityUnitTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2026-10-15T12:10:49" hostname="DESKTOP-4GNCAT4" time="0.129">
+  <properties/>
+  <testcase name="noteExporter_plainTextExport_formatsCleanPlainText" classname="com.aurel.notes.SecurityAndPortabilityUnitTest" time="0.003"/>
+  <testcase name="vaultEncryption_roundTrip_encryptsAndDecryptsAccurately" classname="com.aurel.notes.SecurityAndPortabilityUnitTest" time="0.071"/>
+  <testcase name="backupManifest_schemaValidation_correctStructure" classname="com.aurel.notes.SecurityAndPortabilityUnitTest" time="0.011"/>
+  <testcase name="noteExporter_htmlExport_generatesValidHtmlDocument" classname="com.aurel.notes.SecurityAndPortabilityUnitTest" time="0.029"/>
+  <testcase name="vaultEncryption_tamperedPayload_failsAuthentication" classname="com.aurel.notes.SecurityAndPortabilityUnitTest" time="0.011"/>
+  <testcase name="noteExporter_markdownExport_formatsHeadersAndTagsCorrectly" classname="com.aurel.notes.SecurityAndPortabilityUnitTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

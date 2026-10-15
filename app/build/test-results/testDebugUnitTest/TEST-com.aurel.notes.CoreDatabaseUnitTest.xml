@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.aurel.notes.CoreDatabaseUnitTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2026-10-15T12:10:49" hostname="DESKTOP-4GNCAT4" time="0.283">
+  <properties/>
+  <testcase name="noteSorting_byTitleAndUpdatedDate_worksProperly" classname="com.aurel.notes.CoreDatabaseUnitTest" time="0.076"/>
+  <testcase name="markdownParser_extractChecklistItems_identifiesCheckedAndUnchecked" classname="com.aurel.notes.CoreDatabaseUnitTest" time="0.06"/>
+  <testcase name="markdownParser_extractWikiLinks_findsAllUniqueLinks" classname="com.aurel.notes.CoreDatabaseUnitTest" time="0.013"/>
+  <testcase name="typeConverters_handleEmptyAndNullGracefully" classname="com.aurel.notes.CoreDatabaseUnitTest" time="0.001"/>
+  <testcase name="noteEntity_mappingToDomainAndBack_preservesAllFields" classname="com.aurel.notes.CoreDatabaseUnitTest" time="0.004"/>
+  <testcase name="noteTemplates_allTemplatesContainValidContent" classname="com.aurel.notes.CoreDatabaseUnitTest" time="0.002"/>
+  <testcase name="typeConverters_serializeAndDeserializeListCorrectly" classname="com.aurel.notes.CoreDatabaseUnitTest" time="0.006"/>
+  <testcase name="cardColorTokens_resolvesPastelCorrectlyInLightAndDarkMode" classname="com.aurel.notes.CoreDatabaseUnitTest" time="0.08"/>
+  <testcase name="journalMood_containsEmojisAndValidLabels" classname="com.aurel.notes.CoreDatabaseUnitTest" time="0.003"/>
+  <testcase name="taskEntity_priorityAndCompletionMapping_worksAccurately" classname="com.aurel.notes.CoreDatabaseUnitTest" time="0.004"/>
+  <testcase name="taskRecurrence_calculatesNextDayProperly" classname="com.aurel.notes.CoreDatabaseUnitTest" time="0.0"/>
+  <testcase name="markdownParser_applyFormatting_wrapsInlineCorrectly" classname="com.aurel.notes.CoreDatabaseUnitTest" time="0.017"/>
+  <testcase name="markdownSummaryExtraction_cleansMarkdownSymbolsCorrectly" classname="com.aurel.notes.CoreDatabaseUnitTest" time="0.012"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
