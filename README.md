@@ -17,3 +17,18 @@
 - **Voice Memos & Canvas:** Audio recording with live waveform and a vector sketch drawing canvas.
 - **Reminders & Calendar:** Offline monthly agenda with exact `AlarmManager` reminders that persist across device reboots.
 - **Adaptive UI:** Responsive layout that seamlessly adapts across phones, foldables, and tablets with dynamic particles background.
+
+## 📱 Architecture
+```
+com.aurel.notes/
+├── core/
+│   ├── database/       # Room Entities, DAOs, SQLite TypeConverters
+│   ├── datastore/      # UserPreferences DataStore
+│   ├── designsystem/   # AurelTheme, Colors, Typography, Shapes
+│   ├── markdown/       # MarkdownParser, Live Shortcuts & Tables
+│   ├── security/       # BiometricPrompt & AES-GCM Vault
+│   └── util/           # StringExtensions, DateFormatters, Haptics
+├── data/               # Repository implementations & Mappers
+├── domain/             # Note, Task, Notebook domain models & interfaces
+└── ui/                 # Home, Notes, Editor, Tasks, Calendar, Journal, Canvas
+```
