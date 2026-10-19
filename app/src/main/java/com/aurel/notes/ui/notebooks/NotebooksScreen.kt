@@ -67,9 +67,7 @@ fun NotebooksScreen(
     var showCreateDialog by remember { mutableStateOf(false) }
 
     Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(AurelTheme.colors.background)
+        modifier = Modifier.fillMaxSize()
     ) {
         Column(
             modifier = Modifier

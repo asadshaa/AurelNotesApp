@@ -42,6 +42,20 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.animation.core.Animatable
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.ui.draw.scale
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.LottieConstants
+import com.airbnb.lottie.compose.animateLottieCompositionAsState
+import com.airbnb.lottie.compose.rememberLottieComposition
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -53,6 +67,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.aurel.notes.core.designsystem.AurelTheme
+import com.aurel.notes.core.designsystem.components.AurelAppLogo
+import com.aurel.notes.core.designsystem.components.FloatingParticlesBackground
 import com.aurel.notes.core.designsystem.components.AurelCard
 import com.aurel.notes.core.designsystem.components.AurelTagChip
 import com.aurel.notes.domain.model.Note
@@ -87,9 +103,7 @@ fun HomeScreen(
     }
 
     LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(AurelTheme.colors.background),
+        modifier = Modifier.fillMaxSize(),
         contentPadding = PaddingValues(bottom = 96.dp)
     ) {
         // 1. Contextual Header & Greeting
@@ -99,7 +113,8 @@ fun HomeScreen(
                 date = uiState.formattedDate,
                 dailyPrompt = uiState.dailyPrompt,
                 streakDays = uiState.streakDays,
-                showStreak = uiState.userPrefs.showStreakSection
+                showStreak = uiState.userPrefs.showStreakSection,
+                onNotepadClick = { onNavigateToEditor(0L) }
             )
         }
 
@@ -177,32 +192,35 @@ private fun HomeHeaderSection(
     date: String,
     dailyPrompt: String,
     streakDays: Int,
-    showStreak: Boolean
+    showStreak: Boolean,
+    onNotepadClick: () -> Unit = {}
 ) {
+    val composition by rememberLottieComposition(LottieCompositionSpec.Asset("notepad.json"))
+    val progress by animateLottieCompositionAsState(
+        composition = composition,
+        iterations = LottieConstants.IterateForever,
+        speed = 0.95f
+    )
+    val scaleAnim = remember { Animatable(1f) }
+    val scope = rememberCoroutineScope()
+
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = AurelTheme.spacing.screenHorizontal)
-            .padding(top = 28.dp, bottom = 16.dp)
+            .padding(top = 24.dp, bottom = 14.dp)
     ) {
+        // Date & Streak Row
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Column {
-                Text(
-                    text = date.uppercase(),
-                    style = AurelTheme.typography.labelSmall.copy(letterSpacing = 1.2.sp),
-                    color = AurelTheme.colors.secondaryMuted
-                )
-                Spacer(modifier = Modifier.height(4.dp))
-                Text(
-                    text = greeting,
-                    style = AurelTheme.typography.displayMedium,
-                    color = AurelTheme.colors.primaryInk
-                )
-            }
+            Text(
+                text = date.uppercase(),
+                style = AurelTheme.typography.labelSmall.copy(letterSpacing = 1.2.sp),
+                color = AurelTheme.colors.secondaryMuted
+            )
 
             if (showStreak) {
                 Surface(
@@ -222,11 +240,99 @@ private fun HomeHeaderSection(
                         )
                         Spacer(modifier = Modifier.width(4.dp))
                         Text(
-                            text = "$streakDays d",
+                            text = "$streakDays d streak",
                             style = AurelTheme.typography.labelMedium,
                             color = AurelTheme.colors.primaryAccent
                         )
                     }
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.height(12.dp))
+
+        // Prominent Animated Notepad Hero Card on Main App
+        Surface(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(24.dp))
+                .clickable {
+                    scope.launch {
+                        scaleAnim.animateTo(0.88f, tween(90, easing = FastOutSlowInEasing))
+                        scaleAnim.animateTo(
+                            1f,
+                            spring(dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow)
+                        )
+                        onNotepadClick()
+                    }
+                },
+            shape = RoundedCornerShape(24.dp),
+            color = if (AurelTheme.colors.isDark) Color(0xFF1E1C27) else Color(0xFFF3F0FF),
+            border = androidx.compose.foundation.BorderStroke(
+                1.dp,
+                AurelTheme.colors.primaryAccent.copy(alpha = 0.35f)
+            )
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(18.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(modifier = Modifier.weight(1f).padding(end = 12.dp)) {
+                    Text(
+                        text = greeting,
+                        style = AurelTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold),
+                        color = AurelTheme.colors.primaryInk
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = "Your quiet, local-first thinking space.",
+                        style = AurelTheme.typography.bodySmall,
+                        color = AurelTheme.colors.secondaryMuted
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
+                    Surface(
+                        shape = RoundedCornerShape(12.dp),
+                        color = AurelTheme.colors.primaryAccent.copy(alpha = 0.15f)
+                    ) {
+                        Row(
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 5.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.spacedBy(6.dp)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Filled.Edit,
+                                contentDescription = null,
+                                tint = AurelTheme.colors.primaryAccent,
+                                modifier = Modifier.size(13.dp)
+                            )
+                            Text(
+                                text = "Tap Notepad to capture",
+                                style = AurelTheme.typography.labelSmall.copy(
+                                    fontWeight = FontWeight.SemiBold,
+                                    color = AurelTheme.colors.primaryAccent
+                                )
+                            )
+                        }
+                    }
+                }
+
+                // Interactive Animated Notepad Lottie
+                Box(
+                    modifier = Modifier
+                        .size(108.dp)
+                        .scale(scaleAnim.value)
+                        .clip(RoundedCornerShape(22.dp))
+                        .background(AurelTheme.colors.primaryAccent.copy(alpha = 0.08f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    LottieAnimation(
+                        composition = composition,
+                        progress = { progress },
+                        modifier = Modifier.size(100.dp)
+                    )
                 }
             }
         }
@@ -345,11 +451,20 @@ private fun ZeroStateOnboardingCard(
         colorHex = "#EAE5FF"
     ) {
         Column(modifier = Modifier.fillMaxWidth().padding(4.dp)) {
-            Text(
-                text = "Welcome to Aurel 🌿",
-                style = AurelTheme.typography.headlineLarge,
-                color = AurelTheme.colors.primaryInk
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Column(modifier = Modifier.weight(1f).padding(end = 8.dp)) {
+                    Text(
+                        text = "Welcome to Aurel 🌿",
+                        style = AurelTheme.typography.headlineLarge,
+                        color = AurelTheme.colors.primaryInk
+                    )
+                }
+                AurelAppLogo(size = 52.dp)
+            }
             Spacer(modifier = Modifier.height(8.dp))
             Text(
                 text = "Your quiet, local-first thinking space. Connect your thoughts with backlinks, write without distractions, and keep your tasks clear.",

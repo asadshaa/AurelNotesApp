@@ -27,7 +27,8 @@ data class AurelUserPreferences(
     val showRecentSection: Boolean = true,
     val showTasksSection: Boolean = true,
     val showStreakSection: Boolean = true,
-    val showNotebooksSection: Boolean = true
+    val showNotebooksSection: Boolean = true,
+    val onboardingCompleted: Boolean = false
 )
 
 class UserPreferencesRepository(private val context: Context) {
@@ -45,6 +46,7 @@ class UserPreferencesRepository(private val context: Context) {
         val SHOW_TASKS = booleanPreferencesKey("show_tasks")
         val SHOW_STREAK = booleanPreferencesKey("show_streak")
         val SHOW_NOTEBOOKS = booleanPreferencesKey("show_notebooks")
+        val ONBOARDING_COMPLETED = booleanPreferencesKey("onboarding_completed")
     }
 
     val userPreferencesFlow: Flow<AurelUserPreferences> = context.dataStore.data.map { prefs ->
@@ -68,8 +70,13 @@ class UserPreferencesRepository(private val context: Context) {
             showRecentSection = prefs[Keys.SHOW_RECENT] ?: true,
             showTasksSection = prefs[Keys.SHOW_TASKS] ?: true,
             showStreakSection = prefs[Keys.SHOW_STREAK] ?: true,
-            showNotebooksSection = prefs[Keys.SHOW_NOTEBOOKS] ?: true
+            showNotebooksSection = prefs[Keys.SHOW_NOTEBOOKS] ?: true,
+            onboardingCompleted = prefs[Keys.ONBOARDING_COMPLETED] ?: false
         )
+    }
+
+    suspend fun setOnboardingCompleted(completed: Boolean) {
+        context.dataStore.edit { it[Keys.ONBOARDING_COMPLETED] = completed }
     }
 
     suspend fun setThemeMode(mode: ThemeMode) {

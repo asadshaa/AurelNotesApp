@@ -1,0 +1,47 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <group
+        android:translateX="14"
+        android:translateY="14">
+        <!-- Notebook Outer Cover -->
+        <path
+            android:fillColor="#1E293B"
+            android:pathData="M24,14 L62,14 C67.5,14 72,18.5 72,24 L72,66 C72,71.5 67.5,76 62,76 L24,76 C18.5,76 14,71.5 14,66 L14,24 C14,18.5 18.5,14 24,14 Z"/>
+        
+        <!-- Spine Highlight -->
+        <path
+            android:fillColor="#3B82F6"
+            android:pathData="M14,24 C14,18.5 18.5,14 24,14 L28,14 L28,76 L24,76 C18.5,76 14,71.5 14,66 Z"/>
+
+        <!-- Notebook Pages (Cream/White) -->
+        <path
+            android:fillColor="#F8FAFC"
+            android:pathData="M28,18 L60,18 C63.3,18 66,20.7 66,24 L66,66 C66,69.3 63.3,72 60,72 L28,72 Z"/>
+
+        <!-- Spine Rings / Notches -->
+        <path
+            android:fillColor="#1E293B"
+            android:pathData="M26,24h4v3h-4z M26,34h4v3h-4z M26,44h4v3h-4z M26,54h4v3h-4z M26,64h4v3h-4z"/>
+
+        <!-- Bookmark Ribbon (Amber/Gold) -->
+        <path
+            android:fillColor="#F59E0B"
+            android:pathData="M48,16 L56,16 L56,36 L52,32 L48,36 Z"/>
+
+        <!-- Note Lines -->
+        <path
+            android:fillColor="#CBD5E1"
+            android:pathData="M34,32h24v2h-24z M34,40h24v2h-24z M34,48h18v2h-18z M34,56h22v2h-22z"/>
+
+        <!-- Pen / Stylus Accent (Electric Indigo/Cyan) -->
+        <path
+            android:fillColor="#6366F1"
+            android:pathData="M58,54 L68,44 C69,43 71,43 72,44 L73,45 C74,46 74,48 73,49 L63,59 Z"/>
+        <path
+            android:fillColor="#EC4899"
+            android:pathData="M58,54 L56,61 L63,59 Z"/>
+    </group>
+</vector>

@@ -86,7 +86,7 @@ val LightAurelColors = AurelColors(
 
 val DarkAurelColors = AurelColors(
     background = BackgroundDark,
-    surface = BackgroundDark,
+    surface = CardSurfaceDark,
     cardSurface = CardSurfaceDark,
     primaryInk = PrimaryInkDark,
     secondaryMuted = SecondaryMutedDark,
@@ -103,7 +103,7 @@ val DarkAurelColors = AurelColors(
 
 val AmoledAurelColors = AurelColors(
     background = BackgroundAmoled,
-    surface = BackgroundAmoled,
+    surface = CardSurfaceAmoled,
     cardSurface = CardSurfaceAmoled,
     primaryInk = PrimaryInkDark,
     secondaryMuted = SecondaryMutedDark,

@@ -60,6 +60,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+import com.aurel.notes.core.designsystem.components.AurelAppLogo
+import com.aurel.notes.core.designsystem.components.FloatingParticlesBackground
+
 @Composable
 fun NotesScreen(
     onNavigateToEditor: (Long) -> Unit,
@@ -69,9 +72,7 @@ fun NotesScreen(
     var showSortMenu by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(AurelTheme.colors.background)
+        modifier = Modifier.fillMaxSize()
     ) {
         // Top Action Bar / Selection Bar
         if (uiState.isSelectionMode) {
@@ -523,6 +524,8 @@ private fun EmptyNotesPlaceholder(tab: NotesTab, hasQuery: Boolean) {
         contentAlignment = Alignment.Center
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            AurelAppLogo(size = 64.dp)
+            Spacer(modifier = Modifier.height(16.dp))
             Text(
                 text = when {
                     hasQuery -> "No notes matching your search"

@@ -75,6 +75,7 @@ import com.aurel.notes.core.designsystem.components.AurelTagChip
 @Composable
 fun SettingsScreen(
     onNavigateBack: () -> Unit = {},
+    onNavigateToOnboarding: () -> Unit = {},
     viewModel: SettingsViewModel = viewModel()
 ) {
     val uiState by viewModel.uiState.collectAsState()
@@ -465,8 +466,13 @@ fun SettingsScreen(
                     modifier = Modifier.fillMaxWidth().padding(vertical = 24.dp),
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
+                    com.aurel.notes.core.designsystem.components.AurelAppLogo(
+                        size = 72.dp,
+                        onClick = onNavigateToOnboarding
+                    )
+                    Spacer(modifier = Modifier.height(12.dp))
                     Text(
-                        text = "Aurel",
+                        text = "Aurel Notes",
                         style = AurelTheme.typography.headlineMedium,
                         color = AurelTheme.colors.primaryInk
                     )
@@ -482,6 +488,25 @@ fun SettingsScreen(
                         style = AurelTheme.typography.labelSmall,
                         color = AurelTheme.colors.primaryAccent
                     )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    OutlinedButton(
+                        onClick = onNavigateToOnboarding,
+                        shape = RoundedCornerShape(14.dp),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, AurelTheme.colors.primaryAccent.copy(alpha = 0.5f))
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.ViewCarousel,
+                            contentDescription = null,
+                            tint = AurelTheme.colors.primaryAccent,
+                            modifier = Modifier.size(18.dp)
+                        )
+                        Spacer(modifier = Modifier.width(8.dp))
+                        Text(
+                            text = "Replay App Intro & Animation",
+                            style = AurelTheme.typography.labelMedium,
+                            color = AurelTheme.colors.primaryAccent
+                        )
+                    }
                 }
             }
         }

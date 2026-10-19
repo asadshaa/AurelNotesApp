@@ -33,6 +33,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.aurel.notes.core.designsystem.AurelTheme
 
@@ -51,7 +52,7 @@ fun AurelNavigationShell(
         Row(modifier = Modifier.fillMaxSize().background(AurelTheme.colors.background)) {
             NavigationRail(
                 modifier = Modifier.fillMaxHeight().width(88.dp),
-                containerColor = AurelTheme.colors.surface,
+                containerColor = AurelTheme.colors.cardSurface,
                 header = {
                     Box(modifier = Modifier.padding(vertical = 16.dp)) {
                         FloatingActionButton(
@@ -80,21 +81,26 @@ fun AurelNavigationShell(
                         label = {
                             Text(
                                 destination.title,
-                                style = AurelTheme.typography.labelSmall
+                                style = AurelTheme.typography.labelSmall,
+                                fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Medium
                             )
                         },
                         colors = NavigationRailItemDefaults.colors(
                             selectedIconColor = AurelTheme.colors.primaryAccent,
-                            unselectedIconColor = AurelTheme.colors.secondaryMuted,
+                            unselectedIconColor = AurelTheme.colors.primaryInk.copy(alpha = 0.65f),
                             selectedTextColor = AurelTheme.colors.primaryAccent,
-                            unselectedTextColor = AurelTheme.colors.secondaryMuted,
-                            indicatorColor = AurelTheme.colors.primaryAccent.copy(alpha = 0.12f)
+                            unselectedTextColor = AurelTheme.colors.primaryInk.copy(alpha = 0.70f),
+                            indicatorColor = AurelTheme.colors.primaryAccent.copy(alpha = 0.22f)
                         )
                     )
                 }
             }
 
             Box(modifier = Modifier.weight(1f).fillMaxHeight()) {
+                com.aurel.notes.core.designsystem.components.FloatingParticlesBackground(
+                    modifier = Modifier.fillMaxSize(),
+                    particleCount = 40
+                )
                 content()
             }
         }
@@ -110,11 +116,14 @@ fun AurelNavigationShell(
                 ) {
                     NavigationBar(
                         modifier = Modifier
-                            .height(68.dp)
                             .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp))
-                            .border(1.dp, AurelTheme.colors.divider, RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)),
-                        containerColor = AurelTheme.colors.surface,
-                        tonalElevation = 0.dp
+                            .border(
+                                1.dp,
+                                AurelTheme.colors.divider.copy(alpha = 0.8f),
+                                RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
+                            ),
+                        containerColor = AurelTheme.colors.cardSurface,
+                        tonalElevation = 6.dp
                     ) {
                         AurelDestination.primaryDestinations.forEach { destination ->
                             val selected = currentRoute == destination.route
@@ -125,21 +134,24 @@ fun AurelNavigationShell(
                                     Icon(
                                         if (selected) destination.selectedIcon else destination.unselectedIcon,
                                         contentDescription = destination.title,
-                                        modifier = Modifier.size(22.dp)
+                                        modifier = Modifier.size(24.dp)
                                     )
                                 },
                                 label = {
                                     Text(
                                         destination.title,
-                                        style = AurelTheme.typography.labelSmall
+                                        style = AurelTheme.typography.labelSmall,
+                                        fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Medium,
+                                        maxLines = 1
                                     )
                                 },
+                                alwaysShowLabel = true,
                                 colors = NavigationBarItemDefaults.colors(
                                     selectedIconColor = AurelTheme.colors.primaryAccent,
-                                    unselectedIconColor = AurelTheme.colors.secondaryMuted,
+                                    unselectedIconColor = AurelTheme.colors.primaryInk.copy(alpha = 0.65f),
                                     selectedTextColor = AurelTheme.colors.primaryAccent,
-                                    unselectedTextColor = AurelTheme.colors.secondaryMuted,
-                                    indicatorColor = AurelTheme.colors.primaryAccent.copy(alpha = 0.12f)
+                                    unselectedTextColor = AurelTheme.colors.primaryInk.copy(alpha = 0.70f),
+                                    indicatorColor = AurelTheme.colors.primaryAccent.copy(alpha = 0.22f)
                                 )
                             )
                         }
@@ -164,6 +176,10 @@ fun AurelNavigationShell(
             }
         ) { innerPadding ->
             Box(modifier = Modifier.fillMaxSize().padding(innerPadding)) {
+                com.aurel.notes.core.designsystem.components.FloatingParticlesBackground(
+                    modifier = Modifier.fillMaxSize(),
+                    particleCount = 40
+                )
                 content()
             }
         }

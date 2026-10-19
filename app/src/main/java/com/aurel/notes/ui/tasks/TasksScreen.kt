@@ -65,6 +65,9 @@ import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
+import com.aurel.notes.core.designsystem.components.AurelAppLogo
+import com.aurel.notes.core.designsystem.components.FloatingParticlesBackground
+
 @Composable
 fun TasksScreen(
     viewModel: TasksViewModel = viewModel()
@@ -73,9 +76,7 @@ fun TasksScreen(
     var showCreateDialog by remember { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(AurelTheme.colors.background)
+        modifier = Modifier.fillMaxSize()
     ) {
         // Screen Header
         Row(
@@ -173,6 +174,8 @@ fun TasksScreen(
                 contentAlignment = Alignment.Center
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    AurelAppLogo(size = 56.dp)
+                    Spacer(modifier = Modifier.height(14.dp))
                     Text(
                         text = when (uiState.currentTab) {
                             TaskFilterTab.TODAY -> "No tasks due today"

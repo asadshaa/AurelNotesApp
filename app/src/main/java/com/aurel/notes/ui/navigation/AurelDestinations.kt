@@ -1,6 +1,7 @@
 package com.aurel.notes.ui.navigation
 
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AutoAwesome
 import androidx.compose.material.icons.filled.Book
 import androidx.compose.material.icons.filled.CalendarMonth
 import androidx.compose.material.icons.filled.CheckCircle
@@ -56,6 +57,12 @@ sealed class AurelDestination(
         title = "Settings",
         selectedIcon = Icons.Filled.Settings,
         unselectedIcon = Icons.Outlined.Settings
+    )
+    data object Onboarding : AurelDestination(
+        route = "onboarding",
+        title = "Welcome",
+        selectedIcon = Icons.Filled.AutoAwesome,
+        unselectedIcon = Icons.Filled.AutoAwesome
     )
 
     companion object {

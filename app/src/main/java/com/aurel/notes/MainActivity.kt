@@ -36,6 +36,7 @@ import com.aurel.notes.ui.calendar.CalendarScreen
 import com.aurel.notes.ui.journal.JournalScreen
 import com.aurel.notes.ui.canvas.CanvasScreen
 import com.aurel.notes.ui.settings.SettingsScreen
+import kotlinx.coroutines.launch
 
 class MainActivity : FragmentActivity() {
 
@@ -62,6 +63,13 @@ class MainActivity : FragmentActivity() {
 
             val windowSizeClass = calculateWindowSizeClass(this)
             val isExpanded = windowSizeClass.widthSizeClass != WindowWidthSizeClass.Compact
+
+            val coroutineScope = androidx.compose.runtime.rememberCoroutineScope()
+            val startDestination = if (userPrefs.onboardingCompleted) {
+                AurelDestination.Home.route
+            } else {
+                AurelDestination.Onboarding.route
+            }
 
             AurelTheme(
                 themeMode = userPrefs.themeMode,
@@ -90,7 +98,20 @@ class MainActivity : FragmentActivity() {
                         navController.navigate(AurelDestination.createEditorRoute(0L))
                     }
                 ) {
-                    AurelNavHost(navController = navController)
+                    AurelNavHost(
+                        navController = navController,
+                        startDestination = startDestination,
+                        onCompleteOnboarding = {
+                            coroutineScope.launch {
+                                prefsRepo.setOnboardingCompleted(true)
+                            }
+                            navController.navigate(AurelDestination.Home.route) {
+                                popUpTo(AurelDestination.Onboarding.route) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                    )
                 }
             }
         }
@@ -100,13 +121,20 @@ class MainActivity : FragmentActivity() {
 @Composable
 fun AurelNavHost(
     navController: NavHostController,
+    startDestination: String = AurelDestination.Home.route,
+    onCompleteOnboarding: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     NavHost(
         navController = navController,
-        startDestination = AurelDestination.Home.route,
+        startDestination = startDestination,
         modifier = modifier
     ) {
+        composable(AurelDestination.Onboarding.route) {
+            com.aurel.notes.ui.onboarding.OnboardingScreen(
+                onCompleteOnboarding = onCompleteOnboarding
+            )
+        }
         composable(AurelDestination.Home.route) {
             HomeScreen(
                 onNavigateToEditor = { noteId ->
@@ -160,7 +188,10 @@ fun AurelNavHost(
         }
         composable(AurelDestination.Settings.route) {
             SettingsScreen(
-                onNavigateBack = { navController.popBackStack() }
+                onNavigateBack = { navController.popBackStack() },
+                onNavigateToOnboarding = {
+                    navController.navigate(AurelDestination.Onboarding.route)
+                }
             )
         }
         composable(
