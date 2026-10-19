@@ -12,18 +12,18 @@ class NoteDomainModelUnitTest {
         val note = Note(
             id = 1L,
             title = "Secret Passwords",
-            body = "encrypted payload",
-            isVault = true,
+            content = "encrypted payload",
+            isVaultLocked = true,
             isPinned = false,
             isArchived = false,
             isTrashed = false,
-            colorHex = null,
+            cardColorHex = "#FFFFFF",
             notebookId = null,
             createdAt = System.currentTimeMillis(),
             updatedAt = System.currentTimeMillis()
         )
 
-        assertTrue(note.isVault)
+        assertTrue(note.isVaultLocked)
         assertFalse(note.isPinned)
     }
 
@@ -32,12 +32,12 @@ class NoteDomainModelUnitTest {
         val note = Note(
             id = 2L,
             title = "My Thoughts",
-            body = "Standard note body",
-            isVault = false,
+            content = "Standard note body",
+            isVaultLocked = false,
             isPinned = true,
             isArchived = false,
             isTrashed = false,
-            colorHex = null,
+            cardColorHex = "#FFFFFF",
             notebookId = null,
             createdAt = System.currentTimeMillis(),
             updatedAt = System.currentTimeMillis()
