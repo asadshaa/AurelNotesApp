@@ -32,3 +32,13 @@ com.aurel.notes/
 ├── domain/             # Note, Task, Notebook domain models & interfaces
 └── ui/                 # Home, Notes, Editor, Tasks, Calendar, Journal, Canvas
 ```
+
+## 🛠️ Tech Stack & Libraries
+- **Language:** Kotlin 2.0
+- **UI Toolkit:** Jetpack Compose + Material 3
+- **Local Persistence:** Room Database with FTS4 full-text search
+- **Preferences:** Jetpack DataStore Preferences
+- **Security:** Android KeyStore AES-256 GCM + BiometricPrompt
+- **Concurrency:** Kotlin Coroutines & StateFlow (UDF Architecture)
+- **Audio & Media:** Android MediaRecorder & MediaPlayer
+- **Testing:** JUnit 4, Kotlinx Coroutines Test
